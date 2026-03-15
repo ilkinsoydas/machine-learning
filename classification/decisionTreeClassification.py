@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.tree import DecisionTreeClassifier, export_graphviz
+import graphviz
 from sklearn.model_selection import train_test_split
 
 df = pd.read_csv('../Heart Attack Data Set.csv')
@@ -27,6 +28,11 @@ denemex = [[31,1,2,130,240,0,0,150,0,2,0,0,2]]
 deneme = pd.DataFrame(denemex, columns=x.columns)
 prediction = model.predict(deneme)
 print(prediction)
+
+dot = export_graphviz(model, feature_names=x.columns, filled=True, rounded=True, special_characters=True)
+gorsel = graphviz.Source(dot)
+gorsel.render("tree", format="png", view=True)
+
 
 
 
